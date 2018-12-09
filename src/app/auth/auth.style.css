@@ -1,0 +1,22 @@
+main {
+    display: grid;
+    text-align: center;
+    align-items: center;
+    grid-template-rows: 100vh;
+}
+section {
+    width: 600px;
+    margin: auto;
+}
+mat-form-field {
+    width: 100%;
+}
+button {
+    font-size: 18px;
+    width: 170px;
+    margin-top: 15px;
+}
+a{
+    text-decoration: none;
+    color: inherit;
+}

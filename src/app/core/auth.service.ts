@@ -59,12 +59,19 @@ export class AuthService {
   emailSignUp(email: string, password: string) {
     return this.afAuth.auth
       .createUserWithEmailAndPassword(email, password)
-      .then(user => this.updateUserData(user))
-      .then(() => console.log('Welcome, your account has been created!'))
+ 
+      // here the user object is inside the result data from the auth function
+      .then(data => {
+        console.log("Firebase User: ", data.user); // <-- get it as data.user
+        this.updateUserData(data.user);
+        console.log(
+          `Welcome ${data.user.email}, your account has been created!`
+        );
+      })
       .then(() => {
         this.afAuth.auth.currentUser
           .sendEmailVerification()
-          .then(() => console.log('We sent you an email verification'))
+          .then(() => console.log("We sent you an email verification"))
           .catch(error => console.log(error.message));
       })
       .catch(error => console.log(error.message));
@@ -89,18 +96,18 @@ export class AuthService {
     return this.socialLogin(provider);
   }
 
-  githubLogin() {
-    const provider = new firebase.auth.GithubAuthProvider();
-    return this.socialLogin(provider);
-  }
-  facebookLogin() {
-    const provider = new firebase.auth.FacebookAuthProvider();
-    return this.socialLogin(provider);
-  }
-  twitterLogin() {
-    const provider = new firebase.auth.TwitterAuthProvider();
-    return this.socialLogin(provider);
-  }
+  // githubLogin() {
+  //   const provider = new firebase.auth.GithubAuthProvider();
+  //   return this.socialLogin(provider);
+  // }
+  // facebookLogin() {
+  //   const provider = new firebase.auth.FacebookAuthProvider();
+  //   return this.socialLogin(provider);
+  // }
+  // twitterLogin() {
+  //   const provider = new firebase.auth.TwitterAuthProvider();
+  //   return this.socialLogin(provider);
+  // }
 
   private socialLogin(provider) {
     return this.afAuth.auth

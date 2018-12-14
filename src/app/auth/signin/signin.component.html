@@ -22,8 +22,11 @@
           <mat-error *ngIf="password.valid">Not a valid password</mat-error>
       </mat-form-field><br>
 
-      <button mat-raised-button type="submit" color="accent">Sign In</button>
-      
+      <button mat-raised-button type="submit" color="accent">Sign In</button><br>
+
+      <!-- Google Login -->
+      <button mat-raised-button (click)="auth.googleLogin()"> Google Login</button>
+      <!-- <button mat-raised-button (click)="auth.googleLogin()">Google</button> -->
     </form>   
   </section>
 </main>
